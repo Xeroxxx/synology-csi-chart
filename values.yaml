@@ -28,12 +28,12 @@ images:
   attacher:
     image: registry.k8s.io/sig-storage/csi-attacher
     pullPolicy: IfNotPresent
-    tag: v4.4.0
+    tag: v4.10.0
   # https://kubernetes-csi.github.io/docs/node-driver-registrar.html
   nodeDriverRegistrar:
     image: registry.k8s.io/sig-storage/csi-node-driver-registrar
     pullPolicy: IfNotPresent
-    tag: v2.9.0
+    tag: v2.15.0
   plugin:
     image: synology/synology-csi
     pullPolicy: IfNotPresent
@@ -43,18 +43,21 @@ images:
   provisioner:
     image: registry.k8s.io/sig-storage/csi-provisioner
     pullPolicy: IfNotPresent
-    tag: v3.6.0
+    tag: v5.3.0
   # https://kubernetes-csi.github.io/docs/external-resizer.html
   resizer:
     image: registry.k8s.io/sig-storage/csi-resizer
     pullPolicy: IfNotPresent
-    tag: v1.9.0
+    tag: v1.14.0
   # https://kubernetes-csi.github.io/docs/external-snapshotter.html
   snapshotter:
     image: registry.k8s.io/sig-storage/csi-snapshotter
     pullPolicy: IfNotPresent
-    tag: v6.3.0
+    tag: v7.0.2
 installCSIDriver: true
+# If using Talos.dev set to true to 
+# create a ConfigMap with a chroot script override and set hostPID to true for the node DaemonSet
+talos: false
 nameOverride: ""
 # Specifies affinity, nodeSelector and tolerations for the node DaemonSet
 node:
@@ -62,6 +65,8 @@ node:
   # If your kubelet path is not standard, specify it here :
   # example for miocrok8s distrib : /var/snap/microk8s/common/var/lib/kubelet
   kubeletPath: /var/lib/kubelet
+  # example for most linux distributions
+  iscsiadmPath: /usr/sbin/iscsiadm
   nodeSelector: { }
   tolerations: [ ]
 # This secret holds the credentials for the SMB user - this is not used for iSCSI volumes:
