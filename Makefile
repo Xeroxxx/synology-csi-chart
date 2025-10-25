@@ -26,7 +26,6 @@ dist:
 	helm package . --destination dist
 	curl --fail --output-dir dist --remote-name --silent $(REPO_URL)/index.yaml || true
 	helm repo index dist --merge dist/index.yaml --url $(REPO_URL)
-	helm push ./dist/*.tgz oci://ghcr.io/Xeroxxx
 
 .PHONY: template
 template: custom.yaml
