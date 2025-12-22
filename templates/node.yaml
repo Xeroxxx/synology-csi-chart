@@ -104,7 +104,9 @@ spec:
             - --endpoint=$(CSI_ENDPOINT)
             - --log-level=info
             - --nodeid=$(KUBE_NODE_NAME)
+            {{- if not $talosEnabled }}
             - --chroot-dir=/host
+            {{- end }}
             - --iscsiadm-path={{ .iscsiadmPath }}
           env:
             - name: CSI_ENDPOINT
